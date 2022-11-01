@@ -1,2 +1,2 @@
 ![GHA_workflow_badge](https://github.com/ni-eminen/ohtu-store/workflows/CI/badge.svg)
-
+[![codecov](https://codecov.io/gh/ni-eminen/ohtu-store/branch/master/graph/badge.svg?token=TXRW46WNJA)](https://codecov.io/gh/ni-eminen/ohtu-store)
