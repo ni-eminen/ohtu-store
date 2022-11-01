@@ -6,6 +6,34 @@ class TestVarasto(unittest.TestCase):
     def setUp(self):
         self.varasto = Varasto(10)
 
+    def test_neg_storage(self):
+        self.varasto = Varasto(-1)
+        self.assertAlmostEqual(self.varasto.tilavuus, 0)
+
+    def test_neg_saldo(self):
+        self.varasto = Varasto(0, -1)
+        self.assertAlmostEqual(self.varasto.saldo, 0)
+
+    def test_add_neg_storage(self):
+        p = self.varasto.paljonko_mahtuu()
+        self.varasto.lisaa_varastoon(-1)
+        self.assertAlmostEqual(p, self.varasto.paljonko_mahtuu())
+
+    def test_add_much(self):
+        self.varasto.lisaa_varastoon(100000000)
+        self.assertAlmostEqual(self.varasto.tilavuus, self.varasto.saldo)
+
+        otet = self.varasto.ota_varastosta(-1)
+        self.assertAlmostEqual(otet, 0)
+
+        saldo = self.varasto.saldo
+        otet = self.varasto.ota_varastosta(1000000000)
+        self.assertAlmostEqual(otet, saldo)
+        self.assertAlmostEqual(self.varasto.saldo, 0)
+
+        self.assertEqual(
+            f"saldo = {self.varasto.saldo}, vielä tilaa {self.varasto.paljonko_mahtuu()}", True)  # self.varasto.__str__())
+
     def test_konstruktori_luo_tyhjan_varaston(self):
         # https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertAlmostEqual
         self.assertAlmostEqual(self.varasto.saldo, 0)
